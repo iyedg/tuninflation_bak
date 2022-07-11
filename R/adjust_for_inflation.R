@@ -59,7 +59,7 @@ calculate_inflation <- function(date_from,
 adjust_for_inflation <- function(value,
                                  date_from,
                                  date_to,
-                                 base_year) {
+                                 base_year = 2015) {
   inflation_rate <- calculate_inflation(date_from, date_to, base_year)
   value * inflation_rate
 }
