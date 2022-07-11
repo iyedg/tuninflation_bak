@@ -4,7 +4,7 @@
 \alias{adjust_for_inflation}
 \title{Adjust for inflation}
 \usage{
-adjust_for_inflation(value, date_from, date_to, base_year)
+adjust_for_inflation(value, date_from, date_to, base_year = 2015)
 }
 \arguments{
 \item{value}{The \emph{nominal} value to be adjusted for inflation (in TND)}
