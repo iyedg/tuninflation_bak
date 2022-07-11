@@ -2,5 +2,6 @@
 
 export("%>%")
 export(adjust_for_inflation)
+export(adjust_for_inflation2)
 export(calculate_inflation)
 importFrom(magrittr,"%>%")

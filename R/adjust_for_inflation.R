@@ -61,5 +61,64 @@ adjust_for_inflation <- function(value,
                                  date_to,
                                  base_year = 2015) {
   inflation_rate <- calculate_inflation(date_from, date_to, base_year)
-  value * inflation_rate
+  value * (1 + inflation_rate)
+}
+
+
+
+
+#' Adjust for inflation (For dataframes)
+#'
+#' @param data dataframe
+#' @param values_col column name containing amounts to be adjusted for inflation
+#' @param date_from_col column name containing the observation dates
+#' @param date_to_col column name containing the target dates for adjustment
+#' @param base_year_col column name containing the base year # TODO: make it optional
+#' @param output_col column name for output values
+#'
+#' @return dataframe with added column for real values
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' data <- tibble::tibble(
+#'   budget = c(1, 1, 1, 1),
+#'   observation_date = c(
+#'     as.Date("2016-01-01"),
+#'     as.Date("2017-01-01"),
+#'     as.Date("2018-01-01"),
+#'     as.Date("2019-01-01")
+#'   ),
+#'   target_date = c(
+#'     as.Date("2015-01-01"),
+#'     as.Date("2015-01-01"),
+#'     as.Date("2015-01-01"),
+#'     as.Date("2015-01-01")
+#'   ),
+#'   base_year = c(2015, 2015, 2015, 2015)
+#' )
+#' data %>%
+#'   adjust_for_inflation2(
+#'     values_col = budget,
+#'     date_from_col = observation_date,
+#'     date_to_col = target_date,
+#'     base_year_col = base_year
+#'   )
+#'}
+adjust_for_inflation2 <- function(data,
+                                  values_col,
+                                  date_from_col,
+                                  date_to_col,
+                                  base_year_col,
+                                  output_col = "real_value") {
+  params <- list(
+    dplyr::pull(data, {{ values_col }}),
+    dplyr::pull(data, {{ date_from_col }}),
+    dplyr::pull(data, {{ date_to_col }}),
+    dplyr::pull(data, {{ base_year_col }})
+  )
+  data %>%
+    dplyr::mutate(
+      real_value = unlist(purrr::pmap(params, adjust_for_inflation))
+    )
 }
