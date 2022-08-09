@@ -13,6 +13,8 @@ pacman::p_load(
   gt,
   gtExtras
 )
+conflict_prefer("lag", "dplyr")
+conflict_prefer("filter", "dplyr")
 
 load(here("data/ins_coicop.rda"))
 
@@ -41,6 +43,11 @@ item_inflation <- read_excel(
   mutate(
     monthly_item_inflation = (cpi - lag(cpi, 1)) / lag(cpi, 1),
     yearly_item_inflation = (cpi - lag(cpi, 12)) / lag(cpi, 12)
+  ) %>%
+  rename(
+    ins_weight_2015 = weight
   )
 
 usethis::use_data(item_inflation, overwrite = TRUE)
+
+View(item_inflation)

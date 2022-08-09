@@ -5,7 +5,7 @@
 \alias{ins_coicop}
 \title{National Institute of Statistics (INS) to COICOP correspondence table.}
 \format{
-A data frame with 53940 rows and 10 variables:
+A data frame with 66 rows and 8 variables:
 \describe{
 \item{ins_category}{The category name used by the INS}
 \item{ins_weight_2015}{The weight of the category in the base basket of goods for 2015}
