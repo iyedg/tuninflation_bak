@@ -8,6 +8,7 @@ library(conflicted)
 library(stringr)
 library(glue)
 
+conflict_prefer("lag", "dplyr")
 conflict_prefer("filter", "dplyr")
 
 months <- c(
@@ -101,7 +102,15 @@ consumer_price_index <- raw_consumer_price_index %>%
     cpi = as.numeric(cpi),
     base_year = as.numeric(str_remove(base_year, "x"))
   ) %>%
-  arrange(base_year, measurement_date)
+  arrange(base_year, measurement_date) %>%
+  rename(
+    measurement_period = measurement_date
+  ) %>%
+  group_by(base_year) %>%
+  mutate(
+    monthy_inflation = (cpi - lag(cpi, 1)) / lag(cpi, 1),
+    yearly_inflation = (cpi - lag(cpi, 12)) / lag(cpi, 12)
+  )
 
 
 usethis::use_data(consumer_price_index, overwrite = TRUE)
