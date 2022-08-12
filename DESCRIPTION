@@ -14,7 +14,10 @@ LazyData: true
 Imports: 
     dplyr,
     magrittr,
-    purrr
+    purrr,
+    tidyr
 Suggests: 
+    spelling,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Language: en-US
