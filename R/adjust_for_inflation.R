@@ -27,12 +27,12 @@ calculate_inflation <- function(date_from,
     dplyr::filter(base_year_ == base_year)
 
   cpi_from <- base_year_df %>%
-    dplyr::filter(measurement_date == date_from) %>%
+    dplyr::filter(measurement_period == date_from) %>%
     dplyr::pull(cpi)
 
 
   cpi_to <- base_year_df %>%
-    dplyr::filter(measurement_date == date_to) %>%
+    dplyr::filter(measurement_period == date_to) %>%
     dplyr::pull(cpi)
 
   (cpi_to - cpi_from) / cpi_from
@@ -104,7 +104,7 @@ adjust_for_inflation <- function(value,
 #'     date_to_col = target_date,
 #'     base_year_col = base_year
 #'   )
-#'}
+#' }
 adjust_for_inflation2 <- function(data,
                                   values_col,
                                   date_from_col,
