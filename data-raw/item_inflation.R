@@ -10,13 +10,11 @@ pacman::p_load(
   conflicted,
   stringr,
   fuzzyjoin,
-  gt,
-  gtExtras
+  assertthat
 )
+
 conflict_prefer("lag", "dplyr")
 conflict_prefer("filter", "dplyr")
-
-load(here("data/ins_coicop.rda"))
 
 
 item_inflation <- read_excel(
@@ -48,6 +46,9 @@ item_inflation <- read_excel(
     ins_weight_2015 = weight
   )
 
-usethis::use_data(item_inflation, overwrite = TRUE)
-
-View(item_inflation)
+usethis::use_data(
+  item_inflation,
+  overwrite = TRUE,
+  internal = TRUE,
+  compress = "xz"
+)

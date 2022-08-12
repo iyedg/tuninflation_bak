@@ -81,7 +81,7 @@ consumer_price_index <- raw_consumer_price_index %>%
         month(as.Date(as.numeric(measurement_date), DATE_ORIGIN))
       ),
       TRUE ~ as.character(measurement_date)
-    ) # Values starting from 2014 are read as Excel dates, this mutate harmonizes them
+    ) # Harmonize values starting from 2014 which are read as Excel dates,
   ) %>%
   tidyr::fill(measurement_year, .direction = "down") %>%
   filter(str_detect(measurement_date, regex("^\\d{4}$"), negate = T)) %>%
@@ -105,12 +105,11 @@ consumer_price_index <- raw_consumer_price_index %>%
   arrange(base_year, measurement_date) %>%
   rename(
     measurement_period = measurement_date
-  ) %>%
-  group_by(base_year) %>%
-  mutate(
-    monthy_inflation = (cpi - lag(cpi, 1)) / lag(cpi, 1),
-    yearly_inflation = (cpi - lag(cpi, 12)) / lag(cpi, 12)
   )
 
 
-usethis::use_data(consumer_price_index, overwrite = TRUE)
+usethis::use_data(consumer_price_index,
+  overwrite = TRUE,
+  internal = TRUE,
+  compress = "xz"
+)
