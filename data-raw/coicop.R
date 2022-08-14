@@ -9,9 +9,7 @@ pacman::p_load(
     janitor,
     conflicted,
     stringr,
-    fuzzyjoin,
-    gt,
-    gtExtras
+    fuzzyjoin
 )
 
 `%nin%` <- Negate(`%in%`)
@@ -228,5 +226,3 @@ ins_coicop <- ins_coicop %>%
         id_coicop = code_diff,
         coicop_category_fr = coicop_desc_fr
     )
-
-usethis::use_data(ins_coicop, overwrite = TRUE)

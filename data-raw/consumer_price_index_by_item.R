@@ -17,7 +17,7 @@ conflict_prefer("lag", "dplyr")
 conflict_prefer("filter", "dplyr")
 
 
-item_inflation <- read_excel(
+consumer_price_index_by_item <- read_excel(
   path = here::here("data-raw/ipc_july_2022.xlsx"),
   sheet = "COICOP",
   skip = 6
@@ -47,7 +47,9 @@ item_inflation <- read_excel(
   )
 
 usethis::use_data(
-  item_inflation,
+  consumer_price_index,
+  consumer_price_index_by_item,
+  ins_coicop,
   overwrite = TRUE,
   internal = TRUE,
   compress = "xz"

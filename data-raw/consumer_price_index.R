@@ -106,10 +106,3 @@ consumer_price_index <- raw_consumer_price_index %>%
   rename(
     measurement_period = measurement_date
   )
-
-
-usethis::use_data(consumer_price_index,
-  overwrite = TRUE,
-  internal = TRUE,
-  compress = "xz"
-)
