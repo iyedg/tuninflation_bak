@@ -9,14 +9,6 @@
 #'
 #' @return A dataframe with an index matching the provided frequency, and column for inflation computed relative to the provided frame of reference
 #' @export
-#'
-#' @example
-#' tuninflation(
-#'    start_date = as.Date("2022-01-01"),
-#'    end_date = as.Date("2022-07-01"),
-#'    frequency = "monthly",
-#'    relative_to = "year"
-#' )
 tuninflation <- function(base_year = 2015,
                          start_date,
                          end_date,
