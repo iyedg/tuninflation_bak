@@ -38,13 +38,10 @@ consumer_price_index_by_item <- read_excel(
     measurement_period = excel_numeric_to_date(measurement_period),
     cpi = as.numeric(cpi)
   ) %>%
-  mutate(
-    monthly_item_inflation = (cpi - lag(cpi, 1)) / lag(cpi, 1),
-    yearly_item_inflation = (cpi - lag(cpi, 12)) / lag(cpi, 12)
-  ) %>%
   rename(
     ins_weight_2015 = weight
-  )
+  ) %>%
+  dplyr::inner_join(ins_coicop)
 
 usethis::use_data(
   consumer_price_index,
@@ -54,3 +51,4 @@ usethis::use_data(
   internal = TRUE,
   compress = "xz"
 )
+
