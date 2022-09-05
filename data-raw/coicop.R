@@ -37,7 +37,7 @@ top_level_categories <- c(
 # ! Loading Data
 
 ins_categories <- read_excel(
-  path = here::here("data-raw/ipc_july_2022.xlsx"),
+  path = here::here("data-raw/ipc_august_2022.xlsx"),
   sheet = "COICOP",
   skip = 6
 ) %>%

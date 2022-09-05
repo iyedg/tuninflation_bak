@@ -18,7 +18,7 @@ conflict_prefer("filter", "dplyr")
 
 
 consumer_price_index_by_item <- read_excel(
-  path = here::here("data-raw/ipc_july_2022.xlsx"),
+  path = here::here("data-raw/ipc_august_2022.xlsx"),
   sheet = "COICOP",
   skip = 6
 ) %>%

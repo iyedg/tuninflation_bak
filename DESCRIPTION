@@ -1,6 +1,6 @@
 Package: tuninflation
 Title: Adjust Prices for Inflation Based on Official Data
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: 
     person("Iyed", "Ghedamsi", , "contact@iyedg.me", role = c("aut", "cre"))
 Description: Adjust prices for inflation based on official data.
